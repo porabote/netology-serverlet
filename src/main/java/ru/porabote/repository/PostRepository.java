@@ -17,13 +17,8 @@ public class PostRepository {
   }
 
   public Post save(Post post) {
-    Thread thre = new Thread(new Runnable(){
-      @Override
-      public void run() {
-        this.list.put(post.getId(), post);
-      }
-    });
 
+    this.list.put(post.getId(), post);
     return post;
   }
 
