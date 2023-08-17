@@ -65,7 +65,7 @@ public class MainServlet extends HttpServlet {
     }
 
     private void getById() throws IOException {
-        final var id = Long.parseLong(this.path.substring(path.lastIndexOf("/" + 1)));
+        final var id = Long.parseLong(this.path.substring(path.lastIndexOf("/") + 1));
         controller.getById(id, this.resp);
     }
 
@@ -74,7 +74,7 @@ public class MainServlet extends HttpServlet {
     }
 
     private void delete() throws IOException {
-        final var id = Long.parseLong(this.path.substring(this.path.lastIndexOf("/" + 1)));
+        final var id = Long.parseLong(this.path.substring(this.path.lastIndexOf("/") + 1));
         this.controller.removeById(id, this.resp);
     }
 }

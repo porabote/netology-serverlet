@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71a26459-d203-4513-b78d-83913cc0086d" name="Changes" comment="" />
+    <list default="true" id="71a26459-d203-4513-b78d-83913cc0086d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/porabote/servlet/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/porabote/servlet/MainServlet.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1690720559270</updated>
       <workItem from="1690720560448" duration="2556000" />
-      <workItem from="1690806157236" duration="12320000" />
+      <workItem from="1690806157236" duration="12655000" />
     </task>
     <servers />
   </component>
