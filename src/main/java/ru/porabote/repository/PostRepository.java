@@ -1,24 +1,33 @@
 package ru.porabote.repository;
 
 import ru.porabote.model.Post;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 // Stub
 public class PostRepository {
-  public List<Post> all() {
-    return Collections.emptyList();
+
+  private HashMap<Long, Post> list = new HashMap<>();
+
+  public HashMap<Long, Post> all() {
+    return this.list;
   }
 
-  public Optional<Post> getById(long id) {
-    return Optional.empty();
+  public Post getById(long id) {
+    return this.list.get(id);
   }
 
   public Post save(Post post) {
+    this.list.put(post.getId(), post);
     return post;
   }
 
-  public void removeById(long id) {
+  public boolean removeById(long id) {
+    if (this.list.containsKey(id)) {
+      this.list.remove(id);
+      return true;
+    } else {
+      return false;
+    }
   }
 }
