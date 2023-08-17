@@ -46,13 +46,10 @@ public class MainServlet extends HttpServlet {
     private void route() throws IOException {
         // primitive routing
         if (this.httpMethod.equals("GET") && path.equals("/api/posts")) {
-            this.get(null);
+            this.get();
         }
         if (this.httpMethod.equals("GET") && path.matches("/api/posts/\\d+")) {
-            // easy way
-            final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
-            controller.getById(id, resp);
-            return;
+            this.getById();
         }
         if (this.httpMethod.equals("POST") && path.equals("/api/posts")) {
 
@@ -65,24 +62,19 @@ public class MainServlet extends HttpServlet {
 
     private void get() throws IOException {
         controller.all(resp);
-        return;
     }
 
-    private Post getById(Integer id) throws IOException {
-        if (id == null) {
-            return controller.getById(id, this.resp);
-        }
-        return null;
+    private void getById() throws IOException {
+        final var id = Long.parseLong(this.path.substring(path.lastIndexOf("/" + 1)));
+        controller.getById(id, this.resp);
     }
 
     private void add() throws IOException {
         controller.save(this.req.getReader(), resp);
-        return;
     }
 
     private void delete() throws IOException {
-        // easy way
-        final var id = Long.parseLong(this.path.substring(this.path.lastIndexOf("/")));
+        final var id = Long.parseLong(this.path.substring(this.path.lastIndexOf("/" + 1)));
         this.controller.removeById(id, this.resp);
     }
 }

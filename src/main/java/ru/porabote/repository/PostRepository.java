@@ -4,7 +4,6 @@ import ru.porabote.model.Post;
 
 import java.util.*;
 
-// Stub
 public class PostRepository {
 
   private HashMap<Long, Post> list = new HashMap<>();
@@ -18,7 +17,13 @@ public class PostRepository {
   }
 
   public Post save(Post post) {
-    this.list.put(post.getId(), post);
+    Thread thre = new Thread(new Runnable(){
+      @Override
+      public void run() {
+        this.list.put(post.getId(), post);
+      }
+    });
+
     return post;
   }
 
