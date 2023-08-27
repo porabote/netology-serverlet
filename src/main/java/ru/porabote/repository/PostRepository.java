@@ -3,12 +3,16 @@ package ru.porabote.repository;
 import ru.porabote.model.Post;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PostRepository {
 
-  private HashMap<Long, Post> list = new HashMap<>();
+  private final static AtomicInteger lastId = new AtomicInteger(0);
 
-  public HashMap<Long, Post> all() {
+  private ConcurrentHashMap<Long, Post> list = new ConcurrentHashMap<>();
+
+  public ConcurrentHashMap<Long, Post> all() {
     return this.list;
   }
 
@@ -18,7 +22,8 @@ public class PostRepository {
 
   public Post save(Post post) {
 
-    this.list.put(post.getId(), post);
+    Long id = (long) lastId.incrementAndGet();
+    this.list.put(id, post);
     return post;
   }
 

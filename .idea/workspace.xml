@@ -11,7 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="71a26459-d203-4513-b78d-83913cc0086d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/porabote/servlet/MainServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/porabote/servlet/MainServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/porabote/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/porabote/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/porabote/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/porabote/service/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +167,7 @@
       <updated>1690720559270</updated>
       <workItem from="1690720560448" duration="2556000" />
       <workItem from="1690806157236" duration="13284000" />
-      <workItem from="1692792916006" duration="2211000" />
+      <workItem from="1692792916006" duration="3477000" />
     </task>
     <servers />
   </component>

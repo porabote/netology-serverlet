@@ -7,6 +7,7 @@ import ru.porabote.repository.PostRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PostService {
   private final PostRepository repository;
@@ -15,7 +16,7 @@ public class PostService {
     this.repository = repository;
   }
 
-  public HashMap<Long, Post> all() {
+  public ConcurrentHashMap<Long, Post> all() {
     return repository.all();
   }
 
