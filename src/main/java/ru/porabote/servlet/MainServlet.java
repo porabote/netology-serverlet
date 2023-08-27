@@ -12,10 +12,10 @@ import java.io.IOException;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
-    private String path;
-    private String httpMethod;
-    private HttpServletRequest req;
-    private HttpServletResponse resp;
+    private static final String GET_METHOD = "GET";
+    private static final String POST_METHOD = "POST";
+    private static final String DELETE_METHOD = "DELETE";
+    private static final String API_PREFIX = "api";
 
     @Override
     public void init() {
@@ -30,12 +30,7 @@ public class MainServlet extends HttpServlet {
         try {
 //            resp.setHeader("Content-type", "application/json");
 //            resp.getWriter().print("{\"titles\": \"Hello moto\"}");
-            this.httpMethod = req.getMethod();
-            this.path = req.getRequestURI();
-            this.req = req;
-            this.resp = resp;
-
-            this.route();
+            this.route(req, resp);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,38 +38,50 @@ public class MainServlet extends HttpServlet {
         }
     }
 
-    private void route() throws IOException {
+    private void route(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        String httpMethod = req.getMethod();
+        String path = req.getRequestURI();
+
+        String[] segments = path.split("/");
+        String modelName = segments[2];
+
         // primitive routing
-        if (this.httpMethod.equals("GET") && path.equals("/api/posts")) {
-            this.get();
+        if (httpMethod.equals(GET_METHOD) && path.equals("/" + API_PREFIX + "/" + modelName)) {
+            this.get(resp);
         }
-        if (this.httpMethod.equals("GET") && path.matches("/api/posts/\\d+")) {
-            this.getById();
+        if (httpMethod.equals(GET_METHOD) && path.matches("/" + API_PREFIX + "/" + modelName + "/\\d+")) {
+            this.getById(req, resp);
         }
-        if (this.httpMethod.equals("POST") && path.equals("/api/posts")) {
+        if (httpMethod.equals(POST_METHOD) && path.equals("/" + API_PREFIX + "/" + modelName)) {
 
         }
-        if (this.httpMethod.equals("DELETE") && path.matches("/api/posts/\\d+")) {
-            this.delete();
+        if (httpMethod.equals(DELETE_METHOD) && path.matches("/" + API_PREFIX + "/" + modelName + "/\\d+")) {
+            this.delete(req, resp);
         }
         resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
-    private void get() throws IOException {
+    private void get(HttpServletResponse resp) throws IOException {
         controller.all(resp);
     }
 
-    private void getById() throws IOException {
-        final var id = Long.parseLong(this.path.substring(path.lastIndexOf("/") + 1));
-        controller.getById(id, this.resp);
+    private void getById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        String path = req.getRequestURI();
+
+        final var id = Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
+        controller.getById(id, resp);
     }
 
-    private void add() throws IOException {
-        controller.save(this.req.getReader(), resp);
+    private void add(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        controller.save(req.getReader(), resp);
     }
 
-    private void delete() throws IOException {
-        final var id = Long.parseLong(this.path.substring(this.path.lastIndexOf("/") + 1));
-        this.controller.removeById(id, this.resp);
+    private void delete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String path = req.getRequestURI();
+
+        final var id = Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
+        this.controller.removeById(id, resp);
     }
 }
