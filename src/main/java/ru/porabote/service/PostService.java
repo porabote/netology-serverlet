@@ -1,5 +1,6 @@
 package ru.porabote.service;
 
+import org.springframework.stereotype.Service;
 import ru.porabote.exception.NotFoundException;
 import ru.porabote.model.Post;
 import ru.porabote.repository.PostRepository;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Service
 public class PostService {
   private final PostRepository repository;
 
