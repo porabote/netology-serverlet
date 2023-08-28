@@ -1,6 +1,7 @@
 package ru.porabote.controller;
 
 import com.google.gson.Gson;
+import org.springframework.stereotype.Controller;
 import ru.porabote.model.Post;
 import ru.porabote.service.PostService;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
 
+@Controller
 public class PostController {
   public static final String APPLICATION_JSON = "application/json";
   private final PostService service;
