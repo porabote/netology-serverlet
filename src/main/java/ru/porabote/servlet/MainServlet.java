@@ -2,6 +2,7 @@ package ru.porabote.servlet;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.porabote.controller.PostController;
 import ru.porabote.model.Post;
 import ru.porabote.repository.PostRepository;
@@ -22,11 +23,14 @@ public class MainServlet extends HttpServlet {
     @Override
     public void init() {
 
-        final var factory = new DefaultListableBeanFactory();
-        final var reader = new XmlBeanDefinitionReader(factory);
-        reader.loadBeanDefinitions("beans.xml");
+//        final var factory = new DefaultListableBeanFactory();
+//        final var reader = new XmlBeanDefinitionReader(factory);
+//        reader.loadBeanDefinitions("beans.xml");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(AppConfiguration.class);
+        context.refresh();
 
-        controller = factory.getBean(PostController.class);
+        controller = context.getBean(PostController.class);
     }
 
     @Override
