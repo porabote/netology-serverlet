@@ -11,10 +11,18 @@ import ru.porabote.service.PostService;
 public class AppConfiguration {
 
     @Bean
-    public PostController postController() {
-        PostRepository repository = new PostRepository();
-        PostService service = new PostService(repository);
+    public PostController postController(PostService service) {
         return new PostController(service);
+    }
+
+    @Bean
+    public PostService postService(PostRepository repository) {
+        return new PostService(repository);
+    }
+
+    @Bean
+    public PostRepository postRepository() {
+        return new PostRepository();
     }
 
 }
